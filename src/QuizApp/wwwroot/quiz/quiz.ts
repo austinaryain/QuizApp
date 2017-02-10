@@ -1,11 +1,11 @@
 ﻿/// <reference path="./question.ts"/>
-import { Question } from './question';
 
-    export class Quiz {
+   class Quiz {
 
         questions: Question[];
 
         private _score: number = 0;
+        private timesTried: number = 0;
 
         constructor(mQuestions: Question[]) { this.questions = mQuestions; }
 
@@ -13,15 +13,17 @@ import { Question } from './question';
             return this._score;
         }
 
-        runQuiz() {
+        runQuiz = () => {
 
-            this.questions.forEach((question) => {
-                var ans = prompt(question.getQuestion() + question.getAnswers());
+            for (let i = 0; i < this.questions.length; i++) {
+                let ans = prompt(this.questions[i].getQuestion() + this.questions[i].getAnswers());
 
-                if (question.checkAnswer(ans)) {
-                    this._score += 10;
+                if (this.questions[i].checkAnswer(ans)) {
+                    this._score += this.questions[i]._pointValue;
+                } else {
+                    i--;
                 }
-            });
+            }
 
             console.log(`Final Score: ${this._score}`);
         }

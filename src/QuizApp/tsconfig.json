@@ -5,7 +5,9 @@
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": true,
-    "target": "es5"
+    "target": "es2015",
+    "module": "amd",
+    "outFile": "wwwroot/quiz/main.js"
   },
   "exclude": [
     "node_modules"
