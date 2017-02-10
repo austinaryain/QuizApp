@@ -1,0 +1,6 @@
+C:\Users\aryai\Source\Repos\QuizApp\src\QuizApp\wwwroot\quiz\question.js
+C:\Users\aryai\Source\Repos\QuizApp\src\QuizApp\wwwroot\quiz\question.js.map
+C:\Users\aryai\Source\Repos\QuizApp\src\QuizApp\wwwroot\quiz\quiz.js
+C:\Users\aryai\Source\Repos\QuizApp\src\QuizApp\wwwroot\quiz\quiz.js.map
+C:\Users\aryai\Source\Repos\QuizApp\src\QuizApp\wwwroot\quiz\main.js
+C:\Users\aryai\Source\Repos\QuizApp\src\QuizApp\wwwroot\quiz\main.js.map
