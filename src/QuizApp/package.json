@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "name": "quizzing",
+  "private": true,
+  "devDependencies": {
+    "@types/jquery": "^2.0.40"
+  },
+  "dependencies": {
+    "@types/jquery": "^2.0.40"
+  }
+}

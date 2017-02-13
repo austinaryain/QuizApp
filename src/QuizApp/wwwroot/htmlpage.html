@@ -2,12 +2,315 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Take a Quiz!</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        body{
+            padding-top: 60px;
+        }
+    </style>
 </head>
 <body>
 
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a onclick="switchScene(chooseQuizUI)" class="navbar-brand" href="#">QuizZing</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a onclick="switchScene(chooseQuizUI)" href="#">Quizzes</a></li>
+                    <li><a onclick="switchScene(makeQuizUI)" href="#">Create</a></li>
+                    <li><a onclick="switchScene(scoresUI)" href="#">Scores</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
 
 
+    <div class="container">
+
+         <!-- /Title Row -->
+
+        <div id="chooseQuizUI" class="row" style="display:none;"> <!-- Choose Quiz Row -->
+            <div class="row">
+                <!-- Title Row -->
+                <div class="col-md-8 col-md-offset-2">
+                    <h1 id="" class="text-center">Choose a Quiz</h1>
+                    <hr />
+                </div>
+            </div>
+            <div class="col-md-4 col-md-offset-2">
+                <a onclick="loadQuiz('basics')" href="#" class="btn btn-block btn-lg btn-info">Example Quiz <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a onclick="loadQuiz('basics')" href="#" class="btn btn-block btn-lg btn-info">Example Quiz <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a onclick="loadQuiz('basics')" href="#" class="btn btn-block btn-lg btn-info">Example Quiz <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a onclick="loadQuiz('basics')" href="#" class="btn btn-block btn-lg btn-info">Example Quiz <span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+            <div class="col-md-4">
+                <a onclick="loadQuiz('basics')" href="#" class="btn btn-block btn-lg btn-info">Example Quiz <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a onclick="loadQuiz('basics')" href="#" class="btn btn-block btn-lg btn-info">Example Quiz <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a onclick="loadQuiz('basics')" href="#" class="btn btn-block btn-lg btn-info">Example Quiz <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a onclick="loadQuiz('basics')" href="#" class="btn btn-block btn-lg btn-info">Example Quiz <span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>    
+        </div> <!-- /Choose Quiz Row -->
+
+        <div id="takeQuizUI" class="row text-center" style="display:none;"><!-- Take Quiz Row -->
+            <div class="row">
+                <!-- Title Row -->
+                <div class="col-md-8 col-md-offset-2">
+                    <h1 id="quizName" class="text-center">QuizZing</h1>
+                    <hr />
+                </div>
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+                <h3 id="quizQuestion">1) What color is the sky?</h3>
+                <hr />
+                <div class="col-md-4 col-md-offset-4 text-left">
+                    <div class="radio">
+                        <label id="ans1"><input id="ans1Radio" type="radio" name="optradio">A) <span>Green</span></label>
+                    </div>
+                    <div class="radio">
+                        <label id="ans2"><input id="ans2Radio" type="radio" name="optradio">B) <span>Blue</span></label>
+                    </div>
+                    <div class="radio">
+                        <label id="ans3"><input id="ans3Radio" type="radio" name="optradio">C) <span>Orange</span></label>
+                    </div>
+                    <div class="radio">
+                        <label id="ans4"><input id="ans4Radio" type="radio" name="optradio">D) <span>Red</span></label>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <a id="takeQuizButton" href="#" class="btn btn-block btn-lg btn-primary text-right">Next</a>
+                    <h2>Score: 0</h2>
+                    <hr />
+                </div>
+            </div>
+        </div> <!-- /Take Quiz Row -->
+
+        <div id="makeQuizUI" class="row" style="display:none;"><!-- Make Quiz Row -->
+            <div class="row">
+                <!-- Title Row -->
+                <div class="col-md-8 col-md-offset-2">
+                    <h1 id="" class="text-center">Make a Quiz</h1>
+                    <hr />
+                </div>
+            </div>
+            <div id="makeQuizForm" class="col-md-8 col-lg-offset-2"> <!-- Make Quiz -->
+                <br />
+                <form class="form-horizontal">
+                    <fieldset>
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="quizTitle">Quiz Title</label>
+                            <div class="col-md-5">
+                                <input id="quizTitle" name="quizTitle" type="text" placeholder="Something Cool" class="form-control input-md" required="">
+                            </div>
+                        </div>
+
+                        <!-- Select Basic -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="quizNumQuestions">Number of Questions</label>
+                            <div class="col-md-2">
+                                <select id="quizNumQuestions" name="quizNumQuestions" class="form-control">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Select Basic -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="quizAllowRetries">Allow Retry</label>
+                            <div class="col-md-2">
+                                <select id="quizAllowRetries" name="quizAllowRetries" class="form-control">
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Button (Double) -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="createQuiz">Create Quiz</label>
+                            <div class="col-md-8">
+                                <button id="createQuiz" name="createQuiz" class="btn btn-success">Create</button>
+                                <button id="cancelCreateQuiz" name="cancelCreateQuiz" class="btn btn-danger">Cancel</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>    
+            </div> <!-- / Make Quiz -->
+
+            <div id="makeQuestionsFormUI" class="col-md-8 col-lg-offset-2" style="display:none;"> <!-- Make Questions -->
+                <div class="row">
+                    <!-- Title Row -->
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 id="" class="text-center">Take a Quiz</h1>
+                        <hr />
+                    </div>
+                </div>
+                <form class="form-horizontal">
+                    <fieldset>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="questionTitle">Question Title</label>
+                            <div class="col-md-5">
+                                <input id="questionTitle" name="questionTitle" type="text" placeholder="What color is the sky?" class="form-control input-md" required="">
+
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="answerOne">Answer 1)</label>
+                            <div class="col-md-4">
+                                <input id="answerOne" name="answerOne" type="text" placeholder="Green" class="form-control input-md" required="">
+
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="answerTwo">Answer 2)</label>
+                            <div class="col-md-4">
+                                <input id="answerTwo" name="answerTwo" type="text" placeholder="Blue" class="form-control input-md" required="">
+
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="answerThree">Answer 3)</label>
+                            <div class="col-md-4">
+                                <input id="answerThree" name="answerThree" type="text" placeholder="Orange" class="form-control input-md" required="">
+
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="answerFour">Answer 4)</label>
+                            <div class="col-md-4">
+                                <input id="answerFour" name="answerFour" type="text" placeholder="Red" class="form-control input-md" required="">
+
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="pointValue">Point Value</label>
+                            <div class="col-md-2">
+                                <input id="pointValue" name="pointValue" type="text" placeholder="10-50" class="form-control input-md" required="">
+
+                            </div>
+                        </div>
+
+                        <!-- Button -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="nextQuestionButton"></label>
+                            <div class="col-md-4">
+                                <button id="nextQuestionButton" name="nextQuestionButton" class="btn btn-block btn-primary">Next</button>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div> <!-- / Make Questions -->
+
+        </div> <!-- /Make Quiz Row -->
+
+        <div id="scoresUI" class="row" style="display:none">
+            <div class="row">
+                <!-- Title Row -->
+                <div class="col-md-8 col-md-offset-2">
+                    <h1 id="" class="text-center">SCORES</h1>
+                    <hr />
+                </div>
+            </div>
+
+            <div class="col-md-8 col-md-offset-2 text-center">
+                <table class="table table-striped table-hover table-responsive">
+                    <thead class="text-center">
+                        <tr class="text-center">
+                            <th class="text-center" colspan="3">
+                                Quiz
+                            </th>
+                            <th class="text-center" colspan="1">
+                                Current
+                            </th>
+                            <th class="text-center" colspan="1">
+                                Average
+                            </th>
+                            <th class="text-center" colspan="1">
+                                High
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center">
+                            <td colspan="3">
+                                Basic Animal Quiz
+                            </td>
+                            <td colspan="1">
+                                82
+                            </td>
+                            <td colspan="1">
+                                88
+                            </td>
+                            <td colspan="1">
+                                96
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <td colspan="3">
+                                Basic Physiology Quiz
+                            </td>
+                            <td colspan="1">
+                                76
+                            </td>
+                            <td colspan="1">
+                                80
+                            </td>
+                            <td colspan="1">
+                                84
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <td colspan="3">
+                                Advanced Biology Quiz
+                            </td>
+                            <td colspan="1">
+                                70
+                            </td>
+                            <td colspan="1">
+                                74
+                            </td>
+                            <td colspan="1">
+                                90
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+    </div> <!-- Container -->
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="quiz/main.js"></script>
 </body>
 </html>

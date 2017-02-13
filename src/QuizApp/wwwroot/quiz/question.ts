@@ -51,4 +51,17 @@
 
         }
 
+        toJSON(): string {
+            let a = "[";
+
+            this.answers.forEach((ans) => {
+                a += `"${ans}",`;
+            });
+
+            a = a.slice(0, -1);
+            a += "]";
+
+            return `{"question": "${this.question}", "answers": ${a}}`;
+        }
+
     }
